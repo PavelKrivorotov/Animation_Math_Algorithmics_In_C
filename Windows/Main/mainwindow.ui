@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Demonstration of Math Algorithmics</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="MBMenu">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAlgorithms">
+    <property name="title">
+     <string>Algorithms</string>
+    </property>
+    <widget class="QMenu" name="menuIsomorphic_graph">
+     <property name="title">
+      <string>Isomorphic graph</string>
+     </property>
+     <addaction name="action_Isomorphic_animation"/>
+    </widget>
+    <widget class="QMenu" name="menuDijkstra_algorithm_2">
+     <property name="title">
+      <string>Dijkstra algorithm</string>
+     </property>
+     <addaction name="action_Dijkstra_animation"/>
+    </widget>
+    <widget class="QMenu" name="menuBelman_More_algorithm_2">
+     <property name="title">
+      <string>Belman-More algorithm</string>
+     </property>
+     <addaction name="action_BelmanMore_animation"/>
+    </widget>
+    <widget class="QMenu" name="menuThe_Maximum_path_algorithm_2">
+     <property name="title">
+      <string>The Maximum path algorithm</string>
+     </property>
+     <addaction name="action_MaximumPath_animation"/>
+    </widget>
+    <addaction name="menuIsomorphic_graph"/>
+    <addaction name="menuDijkstra_algorithm_2"/>
+    <addaction name="menuBelman_More_algorithm_2"/>
+    <addaction name="menuThe_Maximum_path_algorithm_2"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Project</string>
+    </property>
+    <addaction name="actionSettings"/>
+    <addaction name="actionAuthor"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuBack">
+    <property name="title">
+     <string>Back</string>
+    </property>
+    <addaction name="actionBack_to_Root_window"/>
+   </widget>
+   <addaction name="menuBack"/>
+   <addaction name="menuAlgorithms"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_Isomorphic_animation">
+   <property name="text">
+    <string>Animation</string>
+   </property>
+  </action>
+  <action name="action_Dijkstra_animation">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Animation</string>
+   </property>
+  </action>
+  <action name="action_BelmanMore_animation">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Animation</string>
+   </property>
+  </action>
+  <action name="action_MaximumPath_animation">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Animation</string>
+   </property>
+  </action>
+  <action name="actionBack_to_Root_window">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Back to Root Window</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionAuthor">
+   <property name="text">
+    <string>Author</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About of project</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
