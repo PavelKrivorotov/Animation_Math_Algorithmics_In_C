@@ -6,14 +6,17 @@
 
 
 struct struct_circle {
-    int         x0;
-    int         y0;
-    int         r;
+    int         number_circle;
+
+    int         x0, y0, r;
+
+    int         count_input_vectors;
+    int         count_output_vectors;
 
     bool        visable;
     bool        update;
 
-    int         number;
+    int         value;
     QPen        style_value;
 
     QColor      background;
@@ -21,24 +24,24 @@ struct struct_circle {
 };
 
 struct struct_vector {
-    int         x0;
-    int         y0;
-    int         x1;
-    int         y1;
-    int         move_to_index;
+    int         move_from_number;
+    int         move_to_number;
+
+    int         x0, y0, x1, y1;
 
     bool        visable;
     bool        update;
 
-    int         value_1;
-    int         value_2;
+    int         value_1, value_2;
 
     QPen        style;
 };
 
 struct struct_label {
-    int         x0;
-    int         y0;
+    int         number_label;
+
+    int         x0, y0;
+
     QList<int>  values;
 
     bool        visable;
@@ -51,99 +54,123 @@ class Graph : public QObject
 {
     Q_OBJECT
 public:
-    explicit Graph(QList<QList<int>> matrix);
+    explicit Graph();
     explicit Graph(Graph *graph);
     ~Graph();
 
 public:
     // Node functions
-    void get_coords_circle(int index, int &x0, int &y0, int &r);
-
-    void get_visable_circle(int index, bool &visable);
-
-    void get_update_circle(int index, bool &update);
-
-    void get_number_circle(int index, int &number, QPen &style);
-
-    void get_style_circle(int index, QColor &background, QPen &style);
-
-    int  get_count_nodes();
+    void append_new_circle(int num_circle);
 
 
-    void set_coords_circle(int index, int x0, int y0, int r);
+    void get_coords_circle(int num_circle, int &x0, int &y0, int &r);
 
-    void set_visable_circle(int index, bool visable);
+    void get_visable_circle(int num_circle, bool &visable);
 
-    void set_update_circle(int index, bool update);
+    void get_update_circle(int num_circle, bool &update);
 
-    void set_number_circle(int index, int number, QPen style);
+    void get_value_circle(int num_circle, int &value, QPen &style);
 
-    void set_style_circle(int index, QColor background, QPen style);
+    void get_style_circle(int num_circle, QColor &background, QPen &style);
+
+    int  get_index_circle(int num_circle);
+
+    int  get_count_circles();
+
+
+    void set_coords_circle(int num_circle, int x0, int y0, int r);
+
+    void set_visable_circle(int num_circle, bool visable);
+
+    void set_update_circle(int num_circle, bool update);
+
+    void set_value_circle(int num_circle, int value, QPen style);
+
+    void set_style_circle(int num_circle, QColor background, QPen style);
 
 
     // Vector functions
-    void get_coords_vector(int ind_row, int ind_col, int &x0, int &y0, int &x1, int &y1, int &move_to_index);
-
-    void get_visable_vector(int ind_row, int ind_col, bool &visable);
-
-    void get_update_vector(int ind_row, int ind_col, bool &update);
-
-    void get_values_vector(int ind_row, int ind_col, int &value_1, int &value_2);
-
-    void get_style_vector(int ind_row, int ind_col, QPen &style);
-
-    QList<int> get_count_vectors();
+    void append_new_vector(int move_from_number, int move_to_number);
 
 
-    void set_coords_vector(int ind_row, int ind_col, int x0, int y0, int x1, int y1, int move_to_index);
+    void get_coords_vector(int ind_vector, int &x0, int &y0, int &x1, int &y1);
 
-    void set_visable_vector(int ind_row, int ind_col, bool visable);
+    void get_coords_vector(int move_from_number, int move_to_number, int &x0, int &y0, int &x1, int &y1);
 
-    void set_update_vector(int ind_row, int ind_col, bool update);
+    void get_visable_vector(int ind_vector, bool &visable);
 
-    void set_values_vector(int ind_row, int ind_col, int value_1, int value_2);
+    void get_visable_vector(int move_from_number, int move_to_number, bool &visable);
 
-    void set_style_vector(int ind_row, int ind_col, QPen style);
+    void get_update_vector(int ind_vector, bool &update);
+
+    void get_update_vector(int move_from_number, int move_to_number, bool &update);
+
+    void get_values_vector(int ind_vector, int &value_1, int &value_2);
+
+    void get_values_vector(int move_from_number, int move_to_number, int &value_1, int &value_2);
+
+    void get_style_vector(int ind_vector, QPen &style);
+
+    void get_style_vector(int move_from_number, int move_to_number, QPen &style);
+
+    int  get_index_vector(int move_from_number, int move_to_number);
+
+    int  get_count_vectors();
 
 
-    void set_move_coords_vector(int index, int move_to_index, int x0, int y0, int x1, int y1);
+    void set_coords_vector(int ind_vector, int x0, int y0, int x1, int y1);
 
-    void set_move_visable_vector(int index, int move_to_index, bool visable);
+    void set_coords_vector(int move_from_number, int move_to_number, int x0, int y0, int x1, int y1);
 
-    void set_move_update_vector(int index, int move_to_index, bool update);
+    void set_visable_vector(int ind_vector, bool visable);
 
-    void set_move_values_vector(int index, int move_to_index, int value_1, int value_2);
+    void set_visable_vector(int move_from_number, int move_to_number, bool visable);
 
-    void set_move_style_vector(int index, int move_to_index, QPen style);
+    void set_update_vector(int ind_vector, bool update);
+
+    void set_update_vector(int move_from_number, int move_to_number, bool update);
+
+    void set_values_vector(int ind_vector, int value_1, int value_2);
+
+    void set_values_vector(int move_from_number, int move_to_number, int value_1, int value_2);
+
+    void set_style_vector(int ind_vector, QPen style);
+
+    void set_style_vector(int move_from_number, int move_to_number, QPen style);
 
 
     // Label functions
-    void get_coords_label(int index, int &x0, int &y0);
+    void append_new_label(int num_label);
 
-    void get_values_label(int index, QList<int> &values);
 
-    void get_visable_label(int index, bool &visable);
+    void get_coords_label(int num_label, int &x0, int &y0);
 
-    void get_update_label(int index, bool &update);
+    void get_values_label(int num_label, QList<int> &values);
 
-    void get_constant_label(int index, bool &constant);
+    void get_visable_label(int num_label, bool &visable);
+
+    void get_update_label(int num_label, bool &update);
+
+    void get_constant_label(int num_label, bool &constant);
+
+    int  get_index_label(int num_label);
 
     int  get_count_labels();
 
 
-    void set_coords_label(int index, int x0, int y0);
+    void set_coords_label(int num_label, int x0, int y0);
 
-    void set_value_label(int index, int value);
+    void set_value_label(int num_label, int value);
 
-    void set_visable_label(int index, bool visable);
+    void set_visable_label(int num_label, bool visable);
 
-    void set_update_label(int index, bool update);
+    void set_update_label(int num_label, bool update);
 
-    void set_constant_label(int index, bool constant);
+    void set_constant_label(int num_label, bool constant);
 
 private:
     QList<struct_circle>            arr_circles;
-    QList<QList<struct_vector>>     arr_vectors;
+    QList<struct_vector>            arr_vectors;
     QList<struct_label>             arr_labels;
     QStringList                     arr_text;
 };

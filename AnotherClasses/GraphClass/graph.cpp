@@ -1,26 +1,9 @@
 
 #include "graph.h"
 
-Graph::Graph(QList<QList<int>> matrix)
+Graph::Graph()
 {
-    struct_circle circle;
-    arr_circles.fill(circle, matrix.size());
 
-    for (int ind_1 = 0; ind_1 < matrix.size(); ind_1++) {
-        QList<struct_vector> vectors;
-
-        for (int ind_2 = 0; ind_2 < matrix.size(); ind_2++) {
-            if (matrix[ind_1][ind_2] != 0 && matrix[ind_1][ind_2] != -1) {
-                struct_vector vector;
-                vectors.append(vector);
-            }
-        }
-
-        arr_vectors.append(vectors);
-    }
-
-    struct_label label;
-    arr_labels.fill(label, matrix.size());
 }
 
 
@@ -33,9 +16,7 @@ Graph::Graph(Graph *graph)
 
     arr_vectors = graph->arr_vectors;
     for (int ind_1 = 0; ind_1 < arr_vectors.size(); ind_1++) {
-        for (int ind_2 = 0; ind_2 < arr_vectors[ind_1].size(); ind_2++) {
-            arr_vectors[ind_1][ind_2].update = false;
-        }
+        arr_vectors[ind_1].update = false;
     }
 
     arr_labels = graph->arr_labels;
@@ -56,256 +37,452 @@ Graph::~Graph()
 
 // Circle statments
 
-void Graph::get_coords_circle(int index, int &x0, int &y0, int &r) {
-    x0 = arr_circles[index].x0;
-    y0 = arr_circles[index].y0;
-    r = arr_circles[index].r;
-}
+void Graph::append_new_circle(int num_circle) {
+    struct_circle circle;
+    circle.number_circle = num_circle;
 
-
-void Graph::get_visable_circle(int index, bool &visable) {
-    visable = arr_circles[index].visable;
-}
-
-
-void Graph::get_update_circle(int index, bool &update) {
-    update = arr_circles[index].update;
-}
-
-
-void Graph::get_number_circle(int index, int &number, QPen &style) {
-    number = arr_circles[index].number;
-    style = arr_circles[index].style_value;
-}
-
-
-void Graph::get_style_circle(int index, QColor &background, QPen &style) {
-    background = arr_circles[index].background;
-    style = arr_circles[index].outline;
+    arr_circles.append(circle);
 }
 
 
 
-void Graph::set_coords_circle(int index, int x0, int y0, int r) {
-    arr_circles[index].x0 = x0;
-    arr_circles[index].y0 = y0;
-    arr_circles[index].r = r;
+void Graph::get_coords_circle(int num_circle, int &x0, int &y0, int &r) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            x0 = arr_circles[ind].x0;
+            y0 = arr_circles[ind].y0;
+            r = arr_circles[ind].r;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_visable_circle(int index, bool visable) {
-    arr_circles[index].visable = visable;
+void Graph::get_visable_circle(int num_circle, bool &visable) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            visable = arr_circles[ind].visable;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_update_circle(int index, bool update) {
-    arr_circles[index].update = update;
+void Graph::get_update_circle(int num_circle, bool &update) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            update = arr_circles[ind].update;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_number_circle(int index, int number, QPen style_number) {
-    arr_circles[index].number = number;
-    arr_circles[index].style_value = style_number;
+void Graph::get_value_circle(int num_circle, int &value, QPen &style) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            value = arr_circles[ind].value;
+            style = arr_circles[ind].style_value;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_style_circle(int index, QColor background, QPen style) {
-    arr_circles[index].background = background;
-    arr_circles[index].outline = style;
+void Graph::get_style_circle(int num_circle, QColor &background, QPen &style) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            background = arr_circles[ind].background;
+            style = arr_circles[ind].outline;
+        }
+    }
 }
 
 
-int Graph::get_count_nodes() {
-    return arr_circles.count();
+int Graph::get_index_circle(int num_circle) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            return ind;
+        }
+    }
+
+    return -1;
+}
+
+
+int  Graph::get_count_circles() {
+    return arr_circles.size();
+}
+
+
+
+void Graph::set_coords_circle(int num_circle, int x0, int y0, int r) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            arr_circles[ind].x0 = x0;
+            arr_circles[ind].y0 = y0;
+            arr_circles[ind].r = r;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_visable_circle(int num_circle, bool visable) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            arr_circles[ind].visable = visable;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_update_circle(int num_circle, bool update) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            arr_circles[ind].update = update;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_value_circle(int num_circle, int value, QPen style_number) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            arr_circles[ind].value = value;
+            arr_circles[ind].style_value = style_number;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_style_circle(int num_circle, QColor background, QPen style) {
+    for (int ind = 0; ind < arr_circles.size(); ind++) {
+        if (arr_circles[ind].number_circle == num_circle) {
+            arr_circles[ind].background = background;
+            arr_circles[ind].outline = style;
+            break;
+        }
+    }
 }
 
 
 
 // Vector statments
 
-void Graph::get_coords_vector(int ind_row, int ind_col, int &x0, int &y0, int &x1, int &y1, int &move_to_index) {
-    x0 = arr_vectors[ind_row][ind_col].x0;
-    y0 = arr_vectors[ind_row][ind_col].y0;
-    x1 = arr_vectors[ind_row][ind_col].x1;
-    y1 = arr_vectors[ind_row][ind_col].y1;
-    move_to_index = arr_vectors[ind_row][ind_col].move_to_index;
-}
+void Graph::append_new_vector(int move_from_number, int move_to_number) {
+    struct_vector vector;
+    vector.move_from_number = move_from_number;
+    vector.move_to_number = move_to_number;
 
-
-void Graph::get_visable_vector(int ind_row, int ind_col, bool &visable) {
-    visable = arr_vectors[ind_row][ind_col].visable;
-}
-
-
-void Graph::get_update_vector(int ind_row, int ind_col, bool &update) {
-    update = arr_vectors[ind_row][ind_col].update;
-}
-
-
-void Graph::get_values_vector(int ind_row, int ind_col, int &value_1, int &value_2) {
-    value_1 = arr_vectors[ind_row][ind_col].value_1;
-    value_2 = arr_vectors[ind_row][ind_col].value_2;
-}
-
-
-void Graph::get_style_vector(int ind_row, int ind_col, QPen &style) {
-    style = arr_vectors[ind_row][ind_col].style;
+    arr_vectors.append(vector);
 }
 
 
 
-void Graph::set_coords_vector(int ind_row, int ind_col, int x0, int y0, int x1, int y1, int move_to_index) {
-    arr_vectors[ind_row][ind_col].x0 = x0;
-    arr_vectors[ind_row][ind_col].y0 = y0;
-    arr_vectors[ind_row][ind_col].x1 = x1;
-    arr_vectors[ind_row][ind_col].y1 = y1;
-    arr_vectors[ind_row][ind_col].move_to_index = move_to_index;
+void Graph::get_coords_vector(int ind_vector, int &x0, int &y0, int &x1, int &y1) {
+    x0 = arr_vectors[ind_vector].x0;
+    y0 = arr_vectors[ind_vector].y0;
+    x1 = arr_vectors[ind_vector].x1;
+    y1 = arr_vectors[ind_vector].y1;
 }
 
 
-void Graph::set_move_coords_vector(int index, int move_to_index, int x0, int y0, int x1, int y1) {
-    for (int ind = 0; ind < arr_vectors[index].size(); ind++) {
-        if (arr_vectors[index][ind].move_to_index == move_to_index) {
-            arr_vectors[index][ind].x0 = x0;
-            arr_vectors[index][ind].y0 = y0;
-            arr_vectors[index][ind].x1 = x1;
-            arr_vectors[index][ind].y1 = y1;
-            break;
-        }
-    }
-}
-
-
-void Graph::set_visable_vector(int ind_row, int ind_col, bool visable) {
-    arr_vectors[ind_row][ind_col].visable = visable;
-}
-
-
-void Graph::set_move_visable_vector(int index, int move_to_index, bool visable) {
+void Graph::get_coords_vector(int move_from_number, int move_to_number, int &x0, int &y0, int &x1, int &y1) {
     for (int ind = 0; ind < arr_vectors.size(); ind++) {
-        if (arr_vectors[index][ind].move_to_index == move_to_index) {
-            arr_vectors[index][ind].visable = visable;
-            break;
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            x0 = arr_vectors[ind].x0;
+            y0 = arr_vectors[ind].y0;
+            x1 = arr_vectors[ind].x1;
+            y1 = arr_vectors[ind].y1;
         }
     }
 }
 
 
-void Graph::set_update_vector(int ind_row, int ind_col, bool update) {
-    arr_vectors[ind_row][ind_col].update = update;
+void Graph::get_visable_vector(int ind_vector, bool &visable) {
+    visable = arr_vectors[ind_vector].visable;
 }
 
 
-void Graph::set_move_update_vector(int index, int move_to_index, bool update) {
+void Graph::get_visable_vector(int move_from_number, int move_to_number, bool &visable) {
     for (int ind = 0; ind < arr_vectors.size(); ind++) {
-        if (arr_vectors[index][ind].move_to_index == move_to_index) {
-            arr_vectors[index][ind].update = update;
-            break;
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            visable = arr_vectors[ind].visable;
         }
     }
 }
 
 
-void Graph::set_values_vector(int ind_row, int ind_col, int value_1, int value_2) {
-    arr_vectors[ind_row][ind_col].value_1 = value_1;
-    arr_vectors[ind_row][ind_col].value_2 = value_2;
+void Graph::get_update_vector(int ind_vector, bool &update) {
+    update = arr_vectors[ind_vector].update;
 }
 
 
-void Graph::set_move_values_vector(int index, int move_to_index, int value_1, int value_2) {
+void Graph::get_update_vector(int move_from_number, int move_to_number, bool &update) {
     for (int ind = 0; ind < arr_vectors.size(); ind++) {
-        if (arr_vectors[index][ind].move_to_index == move_to_index) {
-            arr_vectors[index][ind].value_1 = value_1;
-            arr_vectors[index][ind].value_2 = value_2;
-            break;
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            update = arr_vectors[ind].update;
         }
     }
 }
 
 
-void Graph::set_style_vector(int ind_row, int ind_col, QPen style) {
-    arr_vectors[ind_row][ind_col].style = style;
+void Graph::get_values_vector(int ind_vector, int &value_1, int &value_2) {
+    value_1 = arr_vectors[ind_vector].value_1;
+    value_2 = arr_vectors[ind_vector].value_2;
 }
 
 
-void Graph::set_move_style_vector(int index, int move_to_index, QPen style) {
+void Graph::get_values_vector(int move_from_number, int move_to_number, int &value_1, int &value_2) {
     for (int ind = 0; ind < arr_vectors.size(); ind++) {
-        if (arr_vectors[index][ind].move_to_index == move_to_index) {
-            arr_vectors[index][ind].style = style;
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            value_1 = arr_vectors[ind].value_1;
+            value_2 = arr_vectors[ind].value_2;
         }
     }
 }
 
 
-QList<int> Graph::get_count_vectors() {
-    QList<int> count_vectors;
+void Graph::get_style_vector(int ind_vector, QPen &style) {
+    style = arr_vectors[ind_vector].style;
+}
 
+
+void Graph::get_style_vector(int move_from_number, int move_to_number, QPen &style) {
     for (int ind = 0; ind < arr_vectors.size(); ind++) {
-        if (arr_vectors[ind].size() != 0) {
-            count_vectors.append(arr_vectors[ind].size());
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            style = arr_vectors[ind].style;
+        }
+    }
+}
+
+
+int  Graph::get_index_vector(int move_from_number, int move_to_number) {
+    for (int ind = 0; ind < arr_vectors.size(); ind++) {
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            return ind;
         }
     }
 
-    return count_vectors;
+    return -1;
+}
+
+
+int  Graph::get_count_vectors() {
+    return arr_vectors.size();
+}
+
+
+
+void Graph::set_coords_vector(int ind_vector, int x0, int y0, int x1, int y1) {
+    arr_vectors[ind_vector].x0 = x0;;
+    arr_vectors[ind_vector].y0 = y0;
+    arr_vectors[ind_vector].x1 = x1;
+    arr_vectors[ind_vector].y1 = y1;
+}
+
+
+void Graph::set_coords_vector(int move_from_number, int move_to_number, int x0, int y0, int x1, int y1) {
+    for (int ind = 0; ind < arr_vectors.size(); ind++) {
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            arr_vectors[ind].x0 = x0;
+            arr_vectors[ind].y0 = y0;
+            arr_vectors[ind].x1 = x1;
+            arr_vectors[ind].y1 = y1;
+        }
+    }
+}
+
+
+void Graph::set_visable_vector(int ind_vector, bool visable) {
+    arr_vectors[ind_vector].visable = visable;
+}
+
+
+void Graph::set_visable_vector(int move_from_number, int move_to_number, bool visable) {
+    for (int ind = 0; ind < arr_vectors.size(); ind++) {
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            arr_vectors[ind].visable = visable;
+        }
+    }
+}
+
+
+void Graph::set_update_vector(int ind_vector, bool update) {
+    arr_vectors[ind_vector].update = update;
+}
+
+
+void Graph::set_update_vector(int move_from_number, int move_to_number, bool update) {
+    for (int ind = 0; ind < arr_vectors.size(); ind++) {
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            arr_vectors[ind].update = update;
+        }
+    }
+}
+
+
+void Graph::set_values_vector(int ind_vector, int value_1, int value_2) {
+    arr_vectors[ind_vector].value_1 = value_1;
+    arr_vectors[ind_vector].value_2 = value_2;
+}
+
+
+void Graph::set_values_vector(int move_from_number, int move_to_number, int value_1, int value_2) {
+    for (int ind = 0; ind < arr_vectors.size(); ind++) {
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            arr_vectors[ind].value_1 = value_1;
+            arr_vectors[ind].value_2 = value_2;
+        }
+    }
+}
+
+
+void Graph::set_style_vector(int ind_vector, QPen style) {
+    arr_vectors[ind_vector].style = style;
+}
+
+
+void Graph::set_style_vector(int move_from_number, int move_to_number, QPen style) {
+    for (int ind = 0; ind < arr_vectors.size(); ind++) {
+        if (arr_vectors[ind].move_from_number == move_from_number && arr_vectors[ind].move_to_number == move_to_number) {
+            arr_vectors[ind].style = style;
+        }
+    }
 }
 
 
 
 // Label statments
 
-void Graph::get_coords_label(int index, int &x0, int &y0) {
-    x0 = arr_labels[index].x0;
-    y0 = arr_labels[index].y0;
-}
+void Graph::append_new_label(int num_label) {
+    struct_label label;
+    label.number_label = num_label;
 
-
-void Graph::get_values_label(int index, QList<int> &values) {
-    values = arr_labels[index].values;
-}
-
-
-void Graph::get_visable_label(int index, bool &visable) {
-    visable = arr_labels[index].visable;
-}
-
-
-void Graph::get_update_label(int index, bool &update) {
-    update = arr_labels[index].update;
-}
-
-
-void Graph::get_constant_label(int index, bool &constant) {
-    constant = arr_labels[index].constant;
+    arr_labels.append(label);
 }
 
 
 
-void Graph::set_coords_label(int index, int x0, int y0) {
-    arr_labels[index].x0 = x0;
-    arr_labels[index].y0 = y0;
+void Graph::get_coords_label(int num_label, int &x0, int &y0) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            x0 = arr_labels[ind].x0;
+            y0 = arr_labels[ind].y0;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_value_label(int index, int value) {
-    arr_labels[index].values.append(value);
+void Graph::get_values_label(int num_label, QList<int> &values) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            values = arr_labels[ind].values;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_visable_label(int index, bool visable) {
-    arr_labels[index].visable = visable;
+void Graph::get_visable_label(int num_label, bool &visable) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            visable = arr_labels[ind].visable;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_update_label(int index, bool update) {
-    arr_labels[index].update = update;
+void Graph::get_update_label(int num_label, bool &update) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            update = arr_labels[ind].update;
+            break;
+        }
+    }
 }
 
 
-void Graph::set_constant_label(int index, bool constant) {
-    arr_labels[index].constant = constant;
+void Graph::get_constant_label(int num_label, bool &constant) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            constant = arr_labels[ind].constant;
+            break;
+        }
+    }
 }
 
 
-int Graph::get_count_labels() {
+int  Graph::get_index_label(int num_label) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            return ind;
+        }
+    }
+
+    return -1;
+}
+
+
+int  Graph::get_count_labels() {
     return arr_labels.size();
 }
+
+
+
+void Graph::set_coords_label(int num_label, int x0, int y0) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            arr_labels[ind].x0 = x0;
+            arr_labels[ind].y0 = y0;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_value_label(int num_label, int value) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            arr_labels[ind].values.append(value);
+            break;
+        }
+    }
+}
+
+
+void Graph::set_visable_label(int num_label, bool visable) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            arr_labels[ind].visable = visable;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_update_label(int num_label, bool update) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            arr_labels[ind].update = update;
+            break;
+        }
+    }
+}
+
+
+void Graph::set_constant_label(int num_label, bool constant) {
+    for (int ind = 0; ind < arr_labels.size(); ind++) {
+        if (arr_labels[ind].number_label == num_label) {
+            arr_labels[ind].constant = constant;
+            break;
+        }
+    }
+}
+

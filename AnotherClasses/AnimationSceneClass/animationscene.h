@@ -47,19 +47,19 @@ private:
     QList<Graph*>           arr_animations;
 
     QList<Circle*>          arr_circles;
-    QList<QList<Vector*>>   arr_vectors;
+    QList<Vector*>          arr_vectors;
     QList<Label*>           arr_labels;
     QStringList             arr_text;
 
 private:
-    QGraphicsScene  *scene;
-    QTimer          *timer;
+    QGraphicsScene          *scene;
+    QTimer                  *timer;
 
-    DataDialog      *datadialog;
+    DataDialog              *datadialog;
 
-    Graph           *graph;
+    Graph                   *graph;
 
-    Isomorphic      *isomorphic;
+    Isomorphic              *isomorphic;
 };
 
 #endif // ANIMATIONSCENE_H

@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete splash_window;
+    delete animation_window;
 }
 
 

@@ -5,10 +5,13 @@
 
 
 struct struct_coords {
-    int ind_circle;
-    int x0;
-    int y0;
-    int r;
+    int number_circle;
+    int x0, y0, r;
+
+    int value;
+
+    int number_group;
+    int new_x0, new_y0, new_r;
 };
 
 
@@ -19,8 +22,6 @@ public:
     ~Isomorphic();
 
 public:
-    Graph* get_graph(int index);
-
     QList<Graph*> get_arr_animations();
 
 private:
@@ -30,31 +31,29 @@ private:
     Graph                   *graph;
     QList<Graph*>           arr_animations;
 
-    int                     width_root;
-    int                     height_root;
-    int                     radius_root;
+    int                     width_root, height_root, radius_root;
     QList<struct_coords>    arr_root_coords;
 
-    int                     width_groups;
-    int                     height_groups;
-    int                     width_interval;
-    int                     height_interval;
-    QList<QList<int>>       arr_groups;
-    QList<int>              arr_groups_coords;
+    int                     width_groups, height_groups;
+    int                     width_interval, height_interval;
+    int                     speed_x, speed_y;
+
+    QList<int>              arr_index_groups;
+    QList<int>              arr_circles_in_group;
 
 private:
     void set_circles_to_scene();
 
     void set_vectors_to_scene();
 
-    void set_labels_to_scene();
 
+    void set_root_coords();
 
-    void create_root_coords();
+    void set_default_graph();
 
-    void create_groups();
+    void set_groups();
 
-    void create_groups_coords();
+    void set_new_coords();
 
 
     void rebuilding_objects_on_scene();
